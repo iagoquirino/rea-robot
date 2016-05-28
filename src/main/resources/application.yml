@@ -1,0 +1,7 @@
+server:
+    context-path: /rea-robot-app
+    port: 8080
+
+spring:
+    application:
+        name: rea-robot
