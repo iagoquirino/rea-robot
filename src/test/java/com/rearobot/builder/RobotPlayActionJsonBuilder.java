@@ -58,7 +58,7 @@ public class RobotPlayActionJsonBuilder extends Builder<RobotPlayActionJson> {
         return this;
     }
 
-    public Builder<RobotPlayActionJson> withNoActions() {
+    public RobotPlayActionJsonBuilder withNoActions() {
         this.prototype.setActions(new ArrayList<Action>());
         return this;
     }

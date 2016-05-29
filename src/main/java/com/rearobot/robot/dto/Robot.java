@@ -27,6 +27,13 @@ public class Robot {
 
     /**
      * Constructor
+     */
+    public Robot() {
+        super();
+    }
+
+    /**
+     * Constructor
      *
      * @param positionX
      * @param positionY
@@ -34,7 +41,7 @@ public class Robot {
      * @param programmigActions
      */
     public Robot(Integer positionX, Integer positionY, Direction direction, List<Action> programmigActions) {
-        super();
+        this();
         this.positionX = positionX;
         this.positionY = positionY;
         this.direction = direction;
@@ -74,6 +81,41 @@ public class Robot {
      */
     public List<RobotAction> getActions() {
         return actions;
+    }
+
+    /**
+     * @param positionX the positionX to set
+     */
+    public void setPositionX(Integer positionX) {
+        this.positionX = positionX;
+    }
+
+    /**
+     * @param positionY the positionY to set
+     */
+    public void setPositionY(Integer positionY) {
+        this.positionY = positionY;
+    }
+
+    /**
+     * @param direction the direction to set
+     */
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
+    /**
+     * @param programmigActions the programmigActions to set
+     */
+    public void setProgrammigActions(List<Action> programmigActions) {
+        this.programmigActions = programmigActions;
+    }
+
+    /**
+     * @param actions the actions to set
+     */
+    public void setActions(List<RobotAction> actions) {
+        this.actions = actions;
     }
 
     public void turnLeft() {
