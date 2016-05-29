@@ -15,7 +15,7 @@ import com.rearobot.robot.dto.enuns.Direction;
 @RunWith(MockitoJUnitRunner.class)
 public class RobotServiceValidatorTest {
 
-    private static final Integer POS_Y = 1;
+    private static final Integer POS_Y = 2;
     private static final Integer POS_X = 1;
     @InjectMocks
     private RobotServiceValidator validator;
@@ -68,6 +68,11 @@ public class RobotServiceValidatorTest {
         } catch (IllegalArgumentException e) {
             assertEquals("Inform a valid direction for robot.", e.getMessage());
         }
+    }
+
+    @Test
+    public void mustNotValidate() {
+        validator.validate(POS_X, POS_Y, Direction.EAST);
     }
 
 }
