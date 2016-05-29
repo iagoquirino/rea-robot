@@ -103,6 +103,28 @@ public class ToyControllerTest {
                 .andExpect(jsonPath("result.positionY").value(positionY))
                 .andExpect(jsonPath("result.direction").value(Direction.WEST.toString()));
     }
+    
+    @Test
+    public void performPlayWithRobotPositionsEndPointWhenThrowsIllegalArgumentException() throws Exception {
+        Integer positionX = 0;
+        Integer positionY = 0;
+        Direction direction = Direction.NORTH;
+        
+        RobotPlayActionJson playAction = new RobotPlayActionJsonBuilder()
+                .withDirection(null)
+                .withActions(Lists.newArrayList(Action.LEFT)).build();
+        
+        when(service.play(anyInt(), anyInt(), any(Direction.class), anyList())).thenThrow(new IllegalArgumentException("ANY EXCEPTION"));
+        
+        // WHEN
+        ResultActions resultActions = mockMvc.perform(
+                post("/toys/robots/{positionX},{positionY},{direction}/play",
+                        positionX, positionY, direction)
+                                .content(OBJECT_MAPPER.writeValueAsString(playAction))
+                                .contentType(MediaType.APPLICATION_JSON));
+        // THEN
+        resultActions.andExpect(status().isBadRequest());
+    }
 
     private RobotActionJson getResult() {
         return new RobotActionJson(Action.LEFT, 0, 0, Direction.WEST);

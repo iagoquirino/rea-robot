@@ -1,8 +1,11 @@
 package com.rearobot.toy;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,6 +52,11 @@ public class ToyController {
         Robot robot = service.play(positionX, positionY, direction,
                 playAction.getActions());
         return converter.convert(robot, withHistory);
+    }
+    
+    @ExceptionHandler({IllegalArgumentException.class})
+    void handleBadRequests(HttpServletResponse response) throws Exception {
+        response.sendError(HttpStatus.BAD_REQUEST.value());
     }
 
 }
