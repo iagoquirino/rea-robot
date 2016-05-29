@@ -65,12 +65,25 @@ public class RobotServiceImpl implements RobotService {
         return robot;
     }
 
+    /**
+     * Validate When Place robot on board.
+     *
+     * @param positionX
+     * @param positionY
+     * @param board
+     */
     private void validateWhenSetRobot(Integer positionX, Integer positionY, Board board) {
         if (!board.isValidPosition(positionX, positionY)) {
             throw new IllegalArgumentException("Invalid position to place your robot it will falls :(");
         }
     }
 
+    /**
+     * Peform Robot Actions.
+     *
+     * @param board
+     * @param robot
+     */
     private void performActions(Board board, Robot robot) {
         if (CollectionUtils.isNotEmpty(robot.getProgrammigActions())) {
             robot.getProgrammigActions().forEach(action -> {
@@ -79,6 +92,13 @@ public class RobotServiceImpl implements RobotService {
         }
     }
 
+    /**
+     * Perform Action.
+     * 
+     * @param board
+     * @param robot
+     * @param action
+     */
     private void performAction(Board board, Robot robot, Action action) {
         if (Action.MOVE.equals(action)) {
             if (robot.isAbleToMove(board)) {

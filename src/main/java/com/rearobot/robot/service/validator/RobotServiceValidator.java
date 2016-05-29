@@ -14,6 +14,13 @@ public class RobotServiceValidator {
 
     private static final String MESSAGE_ERROR_POSITION = "Inform a valid position %s for robot.";
 
+    /**
+     * Validate Values.
+     *
+     * @param positionX
+     * @param positionY
+     * @param direction
+     */
     public void validate(Integer positionX, Integer positionY, Direction direction) {
         if (validatePosition(positionX)) {
             throw new IllegalArgumentException(String.format(MESSAGE_ERROR_POSITION, "X"));
@@ -26,6 +33,12 @@ public class RobotServiceValidator {
         }
     }
 
+    /**
+     * Validate Position.
+     *
+     * @param position
+     * @return boolean
+     */
     private boolean validatePosition(Integer position) {
         return position == null || position < 0;
     }

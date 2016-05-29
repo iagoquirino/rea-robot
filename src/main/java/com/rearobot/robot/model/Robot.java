@@ -120,29 +120,50 @@ public class Robot {
         this.actions = actions;
     }
 
+    /**
+     * Make Robot Turn Left.
+     */
     public void turnLeft() {
         this.direction = DirectionalUtils.turnLeft(direction);
         report(positionX, positionY, Action.LEFT);
     }
 
+    /**
+     * Make Robot Turn Right.
+     */
     public void turnRight() {
         this.direction = DirectionalUtils.turnRight(direction);
         report(positionX, positionY, Action.RIGHT);
     }
 
+    /**
+     * Make Robot Report Current Location.
+     */
     public void report() {
         report(positionX, positionY, Action.REPORT);
     }
 
+    /**
+     * Make Robot Move.
+     */
     public void move() {
         doTheMove();
         report(positionX, positionY, Action.MOVE);
     }
 
+    /**
+     * Place Robot on position.
+     */
     public void place() {
         report(positionX, positionY, Action.PLACED);
     }
 
+    /**
+     * Verify if robot is able to make a move.
+     *
+     * @param board
+     * @return boolean
+     */
     public boolean isAbleToMove(Board board) {
         doTheMove();
         boolean validPosition = board.isValidPosition(positionX, positionY);
@@ -150,6 +171,11 @@ public class Robot {
         return validPosition;
     }
 
+    /**
+     * Get Result of Robot.
+     *
+     * @return RobotAction
+     */
     public RobotAction getResult() {
         if (CollectionUtils.isNotEmpty(actions)) {
             return Iterables.getLast(actions);
@@ -157,6 +183,13 @@ public class Robot {
         return null;
     }
 
+    /**
+     * Report actions.
+     *
+     * @param positionX
+     * @param positionY
+     * @param action
+     */
     private void report(Integer positionX, Integer positionY, Action action) {
         addAction(new RobotAction(action, positionX, positionY, this.direction));
     }
@@ -173,11 +206,21 @@ public class Robot {
         actions.add(robotAction);
     }
 
+    /**
+     * Do the move.
+     */
     private void doTheMove() {
         StepAction stepAction = DirectionalUtils.getStepAction(direction);
-        calculateDirections(stepAction);
+        calculatePosition(stepAction);
     }
 
+    /**
+     * Calculate Positions.
+     *
+     * @param stepAction
+     * @param position
+     * @return Integer
+     */
     private Integer calculate(StepAction stepAction, Integer position) {
         if (StepAction.STEP_FOWARD.equals(stepAction)) {
             position++;
@@ -187,12 +230,20 @@ public class Robot {
         return position;
     }
 
+    /**
+     * Undo Move.
+     */
     private void undoMove() {
         StepAction stepAction = DirectionalUtils.getUndoStepAction(direction);
-        calculateDirections(stepAction);
+        calculatePosition(stepAction);
     }
 
-    private void calculateDirections(StepAction stepAction) {
+    /**
+     * Calculate position for robot.
+     *
+     * @param stepAction
+     */
+    private void calculatePosition(StepAction stepAction) {
         if (Direction.NORTH.equals(this.direction) || Direction.SOUTH.equals(direction)) {
             positionY = calculate(stepAction, positionY);
         } else {
