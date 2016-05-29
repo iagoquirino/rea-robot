@@ -36,23 +36,10 @@ public class ToyResponse<T> {
     }
 
     /**
-     * @param result the result to set
-     */
-    public void setResult(T result) {
-        this.result = result;
-    }
-
-    /**
      * @return the history
      */
     public List<T> getHistory() {
         return history;
     }
 
-    /**
-     * @param history the history to set
-     */
-    public void setHistory(List<T> history) {
-        this.history = history;
-    }
 }
