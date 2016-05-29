@@ -1,8 +1,8 @@
 package com.rearobot.utils;
 
 import com.google.common.collect.ImmutableMap;
-import com.rearobot.robot.dto.enuns.Direction;
-import com.rearobot.robot.dto.enuns.StepAction;
+import com.rearobot.robot.model.enuns.Direction;
+import com.rearobot.robot.model.enuns.StepAction;
 
 /**
  * Directional Utils

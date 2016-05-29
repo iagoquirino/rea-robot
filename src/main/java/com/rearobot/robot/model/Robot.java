@@ -1,4 +1,4 @@
-package com.rearobot.robot.dto;
+package com.rearobot.robot.model;
 
 import java.util.List;
 
@@ -6,10 +6,10 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.rearobot.board.dto.Board;
-import com.rearobot.robot.dto.enuns.Action;
-import com.rearobot.robot.dto.enuns.Direction;
-import com.rearobot.robot.dto.enuns.StepAction;
+import com.rearobot.board.model.Board;
+import com.rearobot.robot.model.enuns.Action;
+import com.rearobot.robot.model.enuns.Direction;
+import com.rearobot.robot.model.enuns.StepAction;
 import com.rearobot.utils.DirectionalUtils;
 
 /**

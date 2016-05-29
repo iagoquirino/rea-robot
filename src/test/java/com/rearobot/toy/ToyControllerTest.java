@@ -25,12 +25,12 @@ import org.springframework.test.web.servlet.ResultActions;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.rearobot.builder.RobotPlayActionJsonBuilder;
-import com.rearobot.robot.dto.Robot;
-import com.rearobot.robot.dto.enuns.Action;
-import com.rearobot.robot.dto.enuns.Direction;
 import com.rearobot.robot.json.RobotActionJson;
 import com.rearobot.robot.json.RobotConverter;
 import com.rearobot.robot.json.RobotPlayActionJson;
+import com.rearobot.robot.model.Robot;
+import com.rearobot.robot.model.enuns.Action;
+import com.rearobot.robot.model.enuns.Direction;
 import com.rearobot.robot.service.RobotService;
 import com.rearobot.toy.json.ToyResponse;
 
@@ -103,19 +103,20 @@ public class ToyControllerTest {
                 .andExpect(jsonPath("result.positionY").value(positionY))
                 .andExpect(jsonPath("result.direction").value(Direction.WEST.toString()));
     }
-    
+
     @Test
     public void performPlayWithRobotPositionsEndPointWhenThrowsIllegalArgumentException() throws Exception {
         Integer positionX = 0;
         Integer positionY = 0;
         Direction direction = Direction.NORTH;
-        
+
         RobotPlayActionJson playAction = new RobotPlayActionJsonBuilder()
                 .withDirection(null)
                 .withActions(Lists.newArrayList(Action.LEFT)).build();
-        
-        when(service.play(anyInt(), anyInt(), any(Direction.class), anyList())).thenThrow(new IllegalArgumentException("ANY EXCEPTION"));
-        
+
+        when(service.play(anyInt(), anyInt(), any(Direction.class), anyList())).thenThrow(new IllegalArgumentException(
+                "ANY EXCEPTION"));
+
         // WHEN
         ResultActions resultActions = mockMvc.perform(
                 post("/toys/robots/{positionX},{positionY},{direction}/play",

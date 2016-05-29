@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.rearobot.robot.dto.enuns.Direction;
-import com.rearobot.robot.dto.enuns.StepAction;
+import com.rearobot.robot.model.enuns.Direction;
+import com.rearobot.robot.model.enuns.StepAction;
 
 /**
  * @author iago

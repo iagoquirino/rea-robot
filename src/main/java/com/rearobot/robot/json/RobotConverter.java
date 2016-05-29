@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
-import com.rearobot.robot.dto.Robot;
-import com.rearobot.robot.dto.RobotAction;
+import com.rearobot.robot.model.Robot;
+import com.rearobot.robot.model.RobotAction;
 import com.rearobot.toy.json.ToyResponse;
 
 /**

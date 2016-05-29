@@ -1,4 +1,4 @@
-package com.rearobot.robot.dto.enuns;
+package com.rearobot.robot.model.enuns;
 
 /**
  * @author iago

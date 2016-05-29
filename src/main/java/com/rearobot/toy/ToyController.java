@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rearobot.robot.dto.Robot;
-import com.rearobot.robot.dto.enuns.Direction;
 import com.rearobot.robot.json.RobotActionJson;
 import com.rearobot.robot.json.RobotConverter;
 import com.rearobot.robot.json.RobotPlayActionJson;
+import com.rearobot.robot.model.Robot;
+import com.rearobot.robot.model.enuns.Direction;
 import com.rearobot.robot.service.RobotService;
 import com.rearobot.toy.json.ToyResponse;
 
@@ -37,7 +37,7 @@ public class ToyController {
     private RobotConverter converter;
 
     @RequestMapping(value = "/robots", method = RequestMethod.POST)
-    @ResponseStatus( HttpStatus.OK )
+    @ResponseStatus(HttpStatus.OK)
     public ToyResponse<RobotActionJson> playWithRobot(@RequestBody RobotPlayActionJson playAction,
             @RequestParam(required = false) Boolean withHistory) {
         Robot robot = service.play(playAction);
@@ -45,7 +45,7 @@ public class ToyController {
     }
 
     @RequestMapping(value = "/robots/{positionX},{positionY},{direction}/play", method = RequestMethod.POST)
-    @ResponseStatus( HttpStatus.OK )
+    @ResponseStatus(HttpStatus.OK)
     public ToyResponse<RobotActionJson> playWithRobotWithPositions(Integer positionX, Integer positionY,
             Direction direction,
             @RequestBody RobotPlayActionJson playAction, @RequestParam(required = false) Boolean withHistory) {
@@ -53,9 +53,9 @@ public class ToyController {
                 playAction.getActions());
         return converter.convert(robot, withHistory);
     }
-    
-    @ExceptionHandler({IllegalArgumentException.class})
-    void handleBadRequests(HttpServletResponse response) throws Exception {
+
+    @ExceptionHandler({ IllegalArgumentException.class })
+            void handleBadRequests(HttpServletResponse response) throws Exception {
         response.sendError(HttpStatus.BAD_REQUEST.value());
     }
 

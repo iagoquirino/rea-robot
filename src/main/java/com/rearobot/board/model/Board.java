@@ -1,5 +1,8 @@
-package com.rearobot.board.dto;
+package com.rearobot.board.model;
 
+/**
+ * @author iago
+ */
 public class Board {
 
     private static final int MINIMUM = 0;
@@ -30,7 +33,7 @@ public class Board {
 
     /**
      * Validate Positions
-     * 
+     *
      * @param position
      * @param boardLimit
      * @return Boolean

@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.rearobot.robot.dto.enuns.Direction;
+import com.rearobot.robot.model.enuns.Direction;
 
 /**
  * @author iago

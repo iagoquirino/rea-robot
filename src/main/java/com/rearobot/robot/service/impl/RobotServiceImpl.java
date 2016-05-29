@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.rearobot.board.dto.Board;
-import com.rearobot.robot.dto.Robot;
-import com.rearobot.robot.dto.enuns.Action;
-import com.rearobot.robot.dto.enuns.Direction;
+import com.rearobot.board.model.Board;
 import com.rearobot.robot.json.RobotPlayActionJson;
+import com.rearobot.robot.model.Robot;
+import com.rearobot.robot.model.enuns.Action;
+import com.rearobot.robot.model.enuns.Direction;
 import com.rearobot.robot.service.RobotService;
 import com.rearobot.robot.service.validator.RobotServiceValidator;
 
@@ -34,12 +34,23 @@ public class RobotServiceImpl implements RobotService {
     @Value("${board.height:5}")
     private Integer boardHeight;
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.rearobot.robot.service.RobotService#play (com.rearobot.robot.json.RobotPlayActionJson)
+     */
     @Override
     public Robot play(RobotPlayActionJson playAction) {
         return this.play(playAction.getPositionX(), playAction.getPositionY(), playAction.getDirection(),
                 playAction.getActions());
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.rearobot.robot.service.RobotService#play(java.lang.Integer, java.lang.Integer,
+     * com.rearobot.robot.model.enuns.Direction, java.util.List)
+     */
     @Override
     public Robot play(Integer positionX, Integer positionY, Direction direction,
             List<Action> actions) {

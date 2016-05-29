@@ -2,7 +2,7 @@ package com.rearobot.robot.service.validator;
 
 import org.springframework.stereotype.Component;
 
-import com.rearobot.robot.dto.enuns.Direction;
+import com.rearobot.robot.model.enuns.Direction;
 
 /**
  * @author iago

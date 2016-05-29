@@ -8,10 +8,10 @@ import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.rearobot.builder.RobotBuilder;
-import com.rearobot.robot.dto.Robot;
-import com.rearobot.robot.dto.RobotAction;
-import com.rearobot.robot.dto.enuns.Action;
-import com.rearobot.robot.dto.enuns.Direction;
+import com.rearobot.robot.model.Robot;
+import com.rearobot.robot.model.RobotAction;
+import com.rearobot.robot.model.enuns.Action;
+import com.rearobot.robot.model.enuns.Direction;
 import com.rearobot.toy.json.ToyResponse;
 
 /**

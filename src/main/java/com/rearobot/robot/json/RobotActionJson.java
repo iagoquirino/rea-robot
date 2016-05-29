@@ -1,7 +1,7 @@
 package com.rearobot.robot.json;
 
-import com.rearobot.robot.dto.enuns.Action;
-import com.rearobot.robot.dto.enuns.Direction;
+import com.rearobot.robot.model.enuns.Action;
+import com.rearobot.robot.model.enuns.Direction;
 
 /**
  * @author iago

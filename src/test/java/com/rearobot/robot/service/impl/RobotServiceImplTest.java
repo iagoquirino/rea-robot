@@ -1,9 +1,7 @@
 package com.rearobot.robot.service.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-import static org.mockito.Mockito.verify;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,11 +13,11 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import com.google.common.collect.Lists;
 import com.rearobot.builder.RobotPlayActionJsonBuilder;
-import com.rearobot.robot.dto.Robot;
-import com.rearobot.robot.dto.RobotAction;
-import com.rearobot.robot.dto.enuns.Action;
-import com.rearobot.robot.dto.enuns.Direction;
 import com.rearobot.robot.json.RobotPlayActionJson;
+import com.rearobot.robot.model.Robot;
+import com.rearobot.robot.model.RobotAction;
+import com.rearobot.robot.model.enuns.Action;
+import com.rearobot.robot.model.enuns.Direction;
 import com.rearobot.robot.service.validator.RobotServiceValidator;
 
 /**
@@ -35,15 +33,15 @@ public class RobotServiceImplTest {
 
     @InjectMocks
     private RobotServiceImpl service;
-    
+
     private Integer boardWidth = 5;
-    
+
     private Integer boardHeight = 5;
-    
+
     @Before
-    public void setUp(){
-    	ReflectionTestUtils.setField(service, "boardWidth", boardWidth);
-    	ReflectionTestUtils.setField(service, "boardHeight", boardHeight);
+    public void setUp() {
+        ReflectionTestUtils.setField(service, "boardWidth", boardWidth);
+        ReflectionTestUtils.setField(service, "boardHeight", boardHeight);
     }
 
     @Test
@@ -102,7 +100,7 @@ public class RobotServiceImplTest {
         assertEquals(robot.getActions().get(1), robot.getResult());
         verifyValidator(playAction);
     }
-    
+
     @Test
     public void whenPlayMustMoveFowardWhenRobotTurnedToEAST() {
         RobotPlayActionJson playAction = new RobotPlayActionJsonBuilder()
@@ -121,12 +119,12 @@ public class RobotServiceImplTest {
         assertEquals(robot.getActions().get(1), robot.getResult());
         verifyValidator(playAction);
     }
-    
+
     @Test
     public void whenPlayMustMoveFowardWhenRobotTurnedToWEST() {
         RobotPlayActionJson playAction = new RobotPlayActionJsonBuilder()
-        		.withPositionX(1)
-        		.withPositionY(1)
+                .withPositionX(1)
+                .withPositionY(1)
                 .withActions(Lists.newArrayList(Action.MOVE))
                 .withDirection(Direction.WEST)
                 .build();
