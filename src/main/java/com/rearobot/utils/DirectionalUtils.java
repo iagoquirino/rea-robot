@@ -25,19 +25,12 @@ public class DirectionalUtils {
      * @return Direction
      */
     public static Direction turnLeft(Direction direction) {
-        Direction directionResult = null;
-        if (Direction.NORTH.equals(direction)) {
-            directionResult = Direction.WEST;
-        } else if (Direction.WEST.equals(direction)) {
-            directionResult = Direction.SOUTH;
-        } else if (Direction.SOUTH.equals(direction)) {
-            directionResult = Direction.EAST;
-        } else if (Direction.EAST.equals(direction)) {
-            directionResult = Direction.NORTH;
-        } else {
-            throw new IllegalArgumentException("Please inform a valid direction.");
-        }
-        return directionResult;
+        ImmutableMap<Direction, Direction> directions = ImmutableMap.of(
+                Direction.NORTH, Direction.WEST,
+                Direction.SOUTH, Direction.EAST,
+                Direction.EAST, Direction.NORTH,
+                Direction.WEST, Direction.SOUTH);
+        return directions.get(direction);
     }
 
     /**
@@ -48,11 +41,11 @@ public class DirectionalUtils {
      */
     public static Direction turnRight(Direction direction) {
         ImmutableMap<Direction, Direction> oppositeDirection = ImmutableMap.of(
-                Direction.NORTH, Direction.SOUTH,
-                Direction.SOUTH, Direction.NORTH,
-                Direction.EAST, Direction.WEST,
-                Direction.WEST, Direction.EAST);
-        return oppositeDirection.get(turnLeft(direction));
+                Direction.NORTH, Direction.EAST,
+                Direction.SOUTH, Direction.WEST,
+                Direction.EAST, Direction.SOUTH,
+                Direction.WEST, Direction.NORTH);
+        return oppositeDirection.get(direction);
     }
 
     /**
@@ -72,7 +65,7 @@ public class DirectionalUtils {
 
     /**
      * Get Undo Step Action
-     * 
+     *
      * @param direction
      * @return StepAction
      */

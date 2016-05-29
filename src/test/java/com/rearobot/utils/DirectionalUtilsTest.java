@@ -53,16 +53,6 @@ public class DirectionalUtilsTest {
     }
 
     @Test
-    public void mustTurnLeftWhenPassedNull() {
-        try {
-            DirectionalUtils.turnLeft(null);
-            fail();
-        } catch (IllegalArgumentException e) {
-            assertEquals("Please inform a valid direction.", e.getMessage());
-        }
-    }
-
-    @Test
     public void mustStepFowardWhenNORTH() {
         assertEquals(StepAction.STEP_FOWARD, DirectionalUtils.getStepAction(Direction.NORTH));
     }
