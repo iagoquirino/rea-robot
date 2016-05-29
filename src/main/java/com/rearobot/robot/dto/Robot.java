@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.rearobot.board.dto.Board;
 import com.rearobot.robot.dto.enuns.Action;
@@ -150,13 +151,10 @@ public class Robot {
     }
 
     public RobotAction getResult() {
-        RobotAction result = null;
         if (CollectionUtils.isNotEmpty(actions)) {
-            for (RobotAction robotAction : actions) {
-                result = robotAction;
-            }
+            return Iterables.getLast(actions);
         }
-        return result;
+        return null;
     }
 
     private void report(Integer positionX, Integer positionY, Action action) {
