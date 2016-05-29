@@ -154,3 +154,10 @@ See Ya!
 -----
 
 https://github.com/iquirino88
+
+Things to Improve
+---
+
++ Implement HealthCheck.
++ Implement Identifier of Requisitions by Header.
+
