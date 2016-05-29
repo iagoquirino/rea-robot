@@ -46,15 +46,19 @@ public class RobotServiceImpl implements RobotService {
         LOGGER.info("Start playing with robot.");
         validator.validate(positionX, positionY, direction);
         Board board = new Board(boardWidth,boardHeight);
-        if (!board.isValidPosition(positionX, positionY)) {
-            throw new IllegalArgumentException("Invalid position to place your robot it will falls :(");
-        }
+        validateWhenSetRobot(positionX, positionY, board);
         Robot robot = new Robot(positionX, positionY, direction, actions);
         robot.place();
         performActions(board, robot);
         LOGGER.info("Finished playing with robot.");
         return robot;
     }
+
+	private void validateWhenSetRobot(Integer positionX, Integer positionY, Board board) {
+		if (!board.isValidPosition(positionX, positionY)) {
+            throw new IllegalArgumentException("Invalid position to place your robot it will falls :(");
+        }
+	}
 
     private void performActions(Board board, Robot robot) {
         if (CollectionUtils.isNotEmpty(robot.getProgrammigActions())) {
