@@ -2,6 +2,7 @@ package com.rearobot.utils;
 
 import com.google.common.collect.ImmutableMap;
 import com.rearobot.robot.dto.enuns.Direction;
+import com.rearobot.robot.dto.enuns.StepAction;
 
 /**
  * Directional Utils
@@ -52,6 +53,34 @@ public class DirectionalUtils {
                 Direction.EAST, Direction.WEST,
                 Direction.WEST, Direction.EAST);
         return oppositeDirection.get(turnLeft(direction));
+    }
+
+    /**
+     * Get Step Action
+     *
+     * @param direction
+     * @return StepAction
+     */
+    public static StepAction getStepAction(Direction direction) {
+        ImmutableMap<Direction, StepAction> stepAction = ImmutableMap.of(
+                Direction.NORTH, StepAction.STEP_FOWARD,
+                Direction.SOUTH, StepAction.STEP_BACK,
+                Direction.EAST, StepAction.STEP_FOWARD,
+                Direction.WEST, StepAction.STEP_BACK);
+        return stepAction.get(direction);
+    }
+
+    /**
+     * Get Undo Step Action
+     * 
+     * @param direction
+     * @return StepAction
+     */
+    public static StepAction getUndoStepAction(Direction direction) {
+        ImmutableMap<StepAction, StepAction> undoStepAction = ImmutableMap.of(
+                StepAction.STEP_BACK, StepAction.STEP_FOWARD,
+                StepAction.STEP_FOWARD, StepAction.STEP_BACK);
+        return undoStepAction.get(getStepAction(direction));
     }
 
 }

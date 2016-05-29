@@ -1,13 +1,17 @@
 package com.rearobot.robot.service.impl;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.verify;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import com.google.common.collect.Lists;
 import com.rearobot.builder.RobotPlayActionJsonBuilder;
@@ -31,6 +35,7 @@ public class RobotServiceImplTest {
 
     @InjectMocks
     private RobotServiceImpl service;
+    
 
     @Test
     public void validateWhenPlayOnInvalidAreaOfBoard() {
@@ -138,7 +143,7 @@ public class RobotServiceImplTest {
     }
 
     @Test
-    public void whenPlayMustMoveTwiceCloseEndOfTheBoardTurnToEast() {
+    public void whenPlayMustMoveTwiceCloseEndOfTheBoardRobotTurnedToEast() {
         RobotPlayActionJson playAction = new RobotPlayActionJsonBuilder()
                 .withPositionX(3)
                 .withPositionY(2)
@@ -158,7 +163,7 @@ public class RobotServiceImplTest {
     }
 
     @Test
-    public void whenPlayMustMoveTwiceCloseEndOfTheBoardTurnToNorth() {
+    public void whenPlayMustMoveTwiceCloseEndOfTheBoardRobotTurnedToNorth() {
         RobotPlayActionJson playAction = new RobotPlayActionJsonBuilder()
                 .withPositionX(1)
                 .withPositionY(3)
@@ -173,7 +178,7 @@ public class RobotServiceImplTest {
         assertRobotAction(Action.PLACED, playAction.getPositionX(), playAction.getPositionY(), Direction.NORTH, robot
                 .getActions().get(0));
         assertEquals(robot.getActions().get(1), robot.getResult());
-        assertRobotAction(Action.MOVE, assertPositionX, assertPositionY, Direction.NORTH, robot.getActions().get(1));
+        assertRobotAction(Action.MOVE, assertPositionX, assertPositionY, Direction.NORTH, robot.getResult());
         verifyValidator(playAction);
     }
 
@@ -190,6 +195,26 @@ public class RobotServiceImplTest {
         assertEquals(6, robot.getActions().size());
         assertEquals(robot.getActions().get(5), robot.getResult());
         assertRobotAction(Action.REPORT, assertPosition, assertPosition, Direction.NORTH, robot.getResult());
+        verifyValidator(playAction);
+    }
+
+    @Test
+    public void whenPlayMustMoveTwiceCloseEndOfTheBoardRobotTurnedToSouth() {
+        RobotPlayActionJson playAction = new RobotPlayActionJsonBuilder()
+                .withPositionX(3)
+                .withPositionY(2)
+                .withDirection(Direction.SOUTH)
+                .withActions(Lists.newArrayList(Action.MOVE, Action.MOVE))
+                .build();
+        Integer assertPositionX = 3;
+        Integer assertPositionY = 0;
+        Robot robot = service.play(playAction);
+
+        assertEquals(3, robot.getActions().size());
+        assertRobotAction(Action.PLACED, playAction.getPositionX(), playAction.getPositionY(), Direction.SOUTH, robot
+                .getActions().get(0));
+        assertEquals(robot.getActions().get(2), robot.getResult());
+        assertRobotAction(Action.MOVE, assertPositionX, assertPositionY, Direction.SOUTH, robot.getResult());
         verifyValidator(playAction);
     }
 

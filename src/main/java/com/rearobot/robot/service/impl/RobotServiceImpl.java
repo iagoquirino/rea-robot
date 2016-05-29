@@ -6,6 +6,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.rearobot.board.dto.Board;
@@ -26,7 +27,7 @@ public class RobotServiceImpl implements RobotService {
 
     @Autowired
     private RobotServiceValidator validator;
-
+    
     @Override
     public Robot play(RobotPlayActionJson playAction) {
         return this.play(playAction.getPositionX(), playAction.getPositionY(), playAction.getDirection(),
@@ -38,7 +39,7 @@ public class RobotServiceImpl implements RobotService {
             List<Action> actions) {
         LOGGER.info("Start playing with robot.");
         validator.validate(positionX, positionY, direction);
-        Board board = new Board();
+        Board board = new Board(5,5);
         if (!board.isValidPosition(positionX, positionY)) {
             throw new IllegalArgumentException("Invalid position to place your robot it will falls :(");
         }

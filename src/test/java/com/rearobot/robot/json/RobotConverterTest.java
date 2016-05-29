@@ -31,6 +31,15 @@ public class RobotConverterTest {
     }
 
     @Test
+    public void convertWithActionsNullAndHistoryNull() {
+        Robot robot = new Robot();
+        robot.setActions(null);
+        ToyResponse<RobotActionJson> response = converter.convert(robot, null);
+        assertNull(response.getResult());
+        assertNull(response.getHistory());
+    }
+
+    @Test
     public void convertWithHistory() {
         Robot robot = new RobotBuilder().withActions(getActions()).build();
         ToyResponse<RobotActionJson> response = converter.convert(robot, true);

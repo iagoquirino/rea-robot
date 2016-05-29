@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.rearobot.robot.dto.enuns.Direction;
+import com.rearobot.robot.dto.enuns.StepAction;
 
 /**
  * @author iago
@@ -59,6 +60,46 @@ public class DirectionalUtilsTest {
         } catch (IllegalArgumentException e) {
             assertEquals("Please inform a valid direction.", e.getMessage());
         }
+    }
+
+    @Test
+    public void mustStepFowardWhenNORTH() {
+        assertEquals(StepAction.STEP_FOWARD, DirectionalUtils.getStepAction(Direction.NORTH));
+    }
+
+    @Test
+    public void mustStepBackWhenSOUTH() {
+        assertEquals(StepAction.STEP_BACK, DirectionalUtils.getStepAction(Direction.SOUTH));
+    }
+
+    @Test
+    public void mustStepFowardWhenEAST() {
+        assertEquals(StepAction.STEP_FOWARD, DirectionalUtils.getStepAction(Direction.EAST));
+    }
+
+    @Test
+    public void mustStepBackWhenWEST() {
+        assertEquals(StepAction.STEP_BACK, DirectionalUtils.getStepAction(Direction.WEST));
+    }
+
+    @Test
+    public void mustUndoStepWhenNORTH() {
+        assertEquals(StepAction.STEP_BACK, DirectionalUtils.getUndoStepAction(Direction.NORTH));
+    }
+
+    @Test
+    public void mustUndoStepWhenSOUTH() {
+        assertEquals(StepAction.STEP_FOWARD, DirectionalUtils.getUndoStepAction(Direction.SOUTH));
+    }
+
+    @Test
+    public void mustUndoStepWhenEAST() {
+        assertEquals(StepAction.STEP_BACK, DirectionalUtils.getUndoStepAction(Direction.EAST));
+    }
+
+    @Test
+    public void mustUndoStepWhenWEST() {
+        assertEquals(StepAction.STEP_FOWARD, DirectionalUtils.getUndoStepAction(Direction.WEST));
     }
 
 }

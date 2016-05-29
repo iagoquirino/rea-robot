@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 import com.rearobot.board.dto.Board;
 import com.rearobot.robot.dto.enuns.Action;
 import com.rearobot.robot.dto.enuns.Direction;
+import com.rearobot.robot.dto.enuns.StepAction;
 import com.rearobot.utils.DirectionalUtils;
 
 /**
@@ -133,7 +134,7 @@ public class Robot {
     }
 
     public void move() {
-        calculateMove();
+        doTheMove();
         report(positionX, positionY, Action.MOVE);
     }
 
@@ -142,9 +143,9 @@ public class Robot {
     }
 
     public boolean isAbleToMove(Board board) {
-        calculateMove();
+        doTheMove();
         boolean validPosition = board.isValidPosition(positionX, positionY);
-        redoMove();
+        undoMove();
         return validPosition;
     }
 
@@ -174,19 +175,30 @@ public class Robot {
         actions.add(robotAction);
     }
 
-    private void calculateMove() {
-        if (Direction.NORTH.equals(this.direction) || Direction.SOUTH.equals(direction)) {
-            positionY++;
-        } else {
-            positionX++;
-        }
+    private void doTheMove() {
+        StepAction stepAction = DirectionalUtils.getStepAction(direction);
+        calculateDirections(stepAction);
     }
 
-    private void redoMove() {
-        if (Direction.NORTH.equals(this.direction) || Direction.SOUTH.equals(direction)) {
-            positionY--;
+    private Integer calculate(StepAction stepAction, Integer position) {
+        if (StepAction.STEP_FOWARD.equals(stepAction)) {
+            position++;
         } else {
-            positionX--;
+            position--;
+        }
+        return position;
+    }
+
+    private void undoMove() {
+        StepAction stepAction = DirectionalUtils.getUndoStepAction(direction);
+        calculateDirections(stepAction);
+    }
+
+    private void calculateDirections(StepAction stepAction) {
+        if (Direction.NORTH.equals(this.direction) || Direction.SOUTH.equals(direction)) {
+            positionY = calculate(stepAction, positionY);
+        } else {
+            positionX = calculate(stepAction, positionX);
         }
     }
 

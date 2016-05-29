@@ -10,25 +10,14 @@ public class Board {
 
     /**
      * Constructor
+     *
+     * @param width
+     * @param height
      */
-    public Board() {
+    public Board(int width, int height) {
         super();
-        this.width = 5;
-        this.height = 5;
-    }
-
-    /**
-     * @return the width
-     */
-    public int getWidth() {
-        return width;
-    }
-
-    /**
-     * @return the height
-     */
-    public int getHeight() {
-        return height;
+        this.width = width;
+        this.height = height;
     }
 
     /**
@@ -39,6 +28,13 @@ public class Board {
                 && validatePosition(positionY, height);
     }
 
+    /**
+     * Validate Positions
+     * 
+     * @param position
+     * @param boardLimit
+     * @return Boolean
+     */
     private boolean validatePosition(int position, int boardLimit) {
         return position >= MINIMUM && position < boardLimit;
     }
