@@ -28,6 +28,12 @@ public class RobotServiceImpl implements RobotService {
     @Autowired
     private RobotServiceValidator validator;
     
+	@Value("${board.width:5}")
+    private Integer boardWidth;
+    
+	@Value("${board.height:5}")
+    private Integer boardHeight;
+
     @Override
     public Robot play(RobotPlayActionJson playAction) {
         return this.play(playAction.getPositionX(), playAction.getPositionY(), playAction.getDirection(),
@@ -39,7 +45,7 @@ public class RobotServiceImpl implements RobotService {
             List<Action> actions) {
         LOGGER.info("Start playing with robot.");
         validator.validate(positionX, positionY, direction);
-        Board board = new Board(5,5);
+        Board board = new Board(boardWidth,boardHeight);
         if (!board.isValidPosition(positionX, positionY)) {
             throw new IllegalArgumentException("Invalid position to place your robot it will falls :(");
         }

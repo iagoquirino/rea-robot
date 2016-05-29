@@ -36,6 +36,15 @@ public class RobotServiceImplTest {
     @InjectMocks
     private RobotServiceImpl service;
     
+    private Integer boardWidth = 5;
+    
+    private Integer boardHeight = 5;
+    
+    @Before
+    public void setUp(){
+    	ReflectionTestUtils.setField(service, "boardWidth", boardWidth);
+    	ReflectionTestUtils.setField(service, "boardHeight", boardHeight);
+    }
 
     @Test
     public void validateWhenPlayOnInvalidAreaOfBoard() {
