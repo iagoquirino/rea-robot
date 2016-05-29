@@ -55,7 +55,7 @@ public class ToyController {
     }
 
     @ExceptionHandler({ IllegalArgumentException.class })
-            void handleBadRequests(HttpServletResponse response) throws Exception {
+    private void handleBadRequests(HttpServletResponse response) throws Exception {
         response.sendError(HttpStatus.BAD_REQUEST.value());
     }
 
