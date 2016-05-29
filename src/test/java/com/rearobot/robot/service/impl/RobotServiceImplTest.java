@@ -102,6 +102,46 @@ public class RobotServiceImplTest {
         assertEquals(robot.getActions().get(1), robot.getResult());
         verifyValidator(playAction);
     }
+    
+    @Test
+    public void whenPlayMustMoveFowardWhenRobotTurnedToEAST() {
+        RobotPlayActionJson playAction = new RobotPlayActionJsonBuilder()
+                .withActions(Lists.newArrayList(Action.MOVE))
+                .withDirection(Direction.EAST)
+                .build();
+        Integer assertPositionX = 1;
+        Integer assertPositionY = 0;
+
+        Robot robot = service.play(playAction);
+
+        assertEquals(2, robot.getActions().size());
+        assertRobotAction(Action.PLACED, playAction.getPositionX(), playAction.getPositionY(), playAction
+                .getDirection(), robot.getActions().get(0));
+        assertRobotAction(Action.MOVE, assertPositionX, assertPositionY, Direction.EAST, robot.getActions().get(1));
+        assertEquals(robot.getActions().get(1), robot.getResult());
+        verifyValidator(playAction);
+    }
+    
+    @Test
+    public void whenPlayMustMoveFowardWhenRobotTurnedToWEST() {
+        RobotPlayActionJson playAction = new RobotPlayActionJsonBuilder()
+        		.withPositionX(1)
+        		.withPositionY(1)
+                .withActions(Lists.newArrayList(Action.MOVE))
+                .withDirection(Direction.WEST)
+                .build();
+        Integer assertPositionX = 0;
+        Integer assertPositionY = 1;
+
+        Robot robot = service.play(playAction);
+
+        assertEquals(2, robot.getActions().size());
+        assertRobotAction(Action.PLACED, playAction.getPositionX(), playAction.getPositionY(), playAction
+                .getDirection(), robot.getActions().get(0));
+        assertRobotAction(Action.MOVE, assertPositionX, assertPositionY, Direction.WEST, robot.getActions().get(1));
+        assertEquals(robot.getActions().get(1), robot.getResult());
+        verifyValidator(playAction);
+    }
 
     @Test
     public void whenPlayMustTurnLeft() {
