@@ -35,9 +35,9 @@ public class RobotConverter {
             return null;
         }
         List<RobotActionJson> list = new ArrayList<>();
-        for (RobotAction robotAction : actions) {
-            list.add(convert(robotAction));
-        }
+        actions.forEach(action -> {
+            list.add(convert(action));
+        });
         return list;
     }
 
