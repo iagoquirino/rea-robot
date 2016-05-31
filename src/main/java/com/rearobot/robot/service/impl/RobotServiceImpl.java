@@ -94,7 +94,7 @@ public class RobotServiceImpl implements RobotService {
 
     /**
      * Perform Action.
-     * 
+     *
      * @param board
      * @param robot
      * @param action
@@ -112,6 +112,10 @@ public class RobotServiceImpl implements RobotService {
             robot.turnRight();
         } else if (Action.REPORT.equals(action)) {
             robot.report();
+            LOGGER.info("=== Report Status === Position X: {}, Position Y: {}, Current Direction: {}.",
+                    robot.getPositionX(),
+                    robot.getPositionY(),
+                    robot.getDirection());
         } else {
             throw new IllegalArgumentException("Invalid action your robot can`t do that.");
         }
