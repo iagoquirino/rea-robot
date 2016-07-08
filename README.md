@@ -3,6 +3,8 @@ Toy Robot Simulator Application
 
 [![Build Status](https://travis-ci.org/iquirino88/rea-robot.svg?branch=master)](https://travis-ci.org/iquirino88/rea-robot)
 
+[![Coverage Status](https://coveralls.io/repos/github/iquirino88/rea-robot/badge.svg?branch=master)](https://coveralls.io/github/iquirino88/rea-robot?branch=master)
+
 It is an application that simulates the actions of a small robot , on a board , based on informed commands to execute.
 
 **Execution Requirements:**
